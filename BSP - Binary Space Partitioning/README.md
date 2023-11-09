@@ -5,7 +5,7 @@ https://www.roguebasin.com/index.php/Basic_BSP_Dungeon_generation
 Most BSP dungeon generation algorithms use the tree data struction.
 The way my generation works is by using the queue data structure. It works as follows.
 
-![]([http://url/to/img.png](https://github.com/TeMyls/Miscellaneous-/blob/main/BSP%20-%20Binary%20Space%20Partitioning/BSPqueuevisualization.png)https://github.com/TeMyls/Miscellaneous-/blob/main/BSP%20-%20Binary%20Space%20Partitioning/BSPqueuevisualization.png)
+![](https://github.com/TeMyls/Miscellaneous-/blob/main/BSP%20-%20Binary%20Space%20Partitioning/BSPqueuevisualization.png)
 
 The square represents the X, Y, Width, and Height of the 2d Array or Grid as in an array within a larger array represented by the brackets in the image.
 It's further split into two subsections each with their own array and the larger square removed from the queue
