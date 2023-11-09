@@ -1,3 +1,4 @@
+#Binary Space Partitioning
 Binary Space Partitioning or BSP consists of dividing an 2d array or grid into many subsections.
 <br /> This article was the basis of this to help me conceptually understand the algorithm.<br />
 ["Rogue Basin article on BSP Dungeon Generation"](https://www.roguebasin.com/index.php/Basic_BSP_Dungeon_generation)
