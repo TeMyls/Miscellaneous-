@@ -34,7 +34,8 @@ def random_direction(arr,y,x,visited):
 	#[up,right,down,left]
 	#x_vectors = [0,1,0,-1]
 	#y_vectors = [-1,0,1,0]
-	#by editing  you can bias the generation
+	#by editing  you can bias the generation. upbove is unbiased
+	#right now this is bias upwards
 	x_vectors = [0,0,0,1,1,0,-1,-1,-1]
 	y_vectors = [-1,-1,-1,0,0,1,0,0,0]
 	
