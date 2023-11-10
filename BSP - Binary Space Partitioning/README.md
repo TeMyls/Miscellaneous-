@@ -14,7 +14,8 @@ Most BSP dungeon generation algorithms use the tree data struction.
 ![](https://github.com/TeMyls/Miscellaneous-/blob/main/BSP%20-%20Binary%20Space%20Partitioning/BSPqueuevisualization.png)
 
 # Results
-The reason why the subsections are so lopsided in some cases is that the vertical or horizontal splitting is random.
+The reason why the subsections are so lopsided in some cases is that the vertical or horizontal splitting is random. 
+<br />This can be remedied by replacing the 'rand' variable with 1 or 0 so the similar layouts are generated each time.
 
 ![](https://github.com/TeMyls/Miscellaneous-/blob/main/BSP%20-%20Binary%20Space%20Partitioning/BSPsubdivisions.PNG)
 
