@@ -39,8 +39,8 @@ def limits(arr,rect):
 			else:
 				arr[row][col] = 0
 
-def BSP_display(arr):
-    for i in bord:
+def BSP_display(borders,arr):
+    for i in borders:
         limits(arr,i)   
     symbol_display(arr)
 
@@ -110,4 +110,4 @@ barr = empty_map(ROWS,COLS,[])
 
 bord = BSP(barr,SPLITS)
 
-BSP_display(barr)
+BSP_display(bord,barr)
