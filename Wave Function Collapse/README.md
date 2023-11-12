@@ -1,5 +1,5 @@
 # Wave Function Collapse
-A great resource for understanding the Wave Function Collapse Algorithm is [video](https://youtu.be/2SuvO4Gi7uY?si=6FCXBzKSAgtEShIk)
+A great resource for understanding the Wave Function Collapse Algorithm is this [video](https://youtu.be/2SuvO4Gi7uY?si=6FCXBzKSAgtEShIk)
 
 
 
