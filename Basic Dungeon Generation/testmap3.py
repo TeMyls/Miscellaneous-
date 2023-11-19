@@ -731,6 +731,11 @@ def floor_maker(grid,rooms,borders):
 		
 		rw = 8 #int(i[2] * (random.randint(40,70)/100)) 
 		rh = 6 #int(i[3] * (random.randint(40,70)/100)) 
+		plus_minus = [-1,1]
+		if rw % 2 == 0:
+			rw += random.choice(plus_minus)
+		if rh% 2 == 0:
+			rh += random.choice(plus_minus)
 		#the plus one and minus one is so rooms don't touch the edge of the grid'
 		rx = random.randint(i[0] + 1,(i[0] + i[2] - rw) - 1)
 		ry = random.randint(i[1] + 1,(i[1] + i[3] - rh) - 1)
