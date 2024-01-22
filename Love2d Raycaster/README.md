@@ -1,4 +1,4 @@
-#Raycasting 
+# Raycasting 
 Raycasting is an old technique used to render a fake 3d environment from a map in the form of a array.
 
 <br />This technique uses an extremely fast algorithm know. as Digital Differential Analyser or the DDA Algorithm.
