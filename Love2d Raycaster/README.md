@@ -19,5 +19,8 @@ Raycasting is an old technique used to render a fake 3d environment from a map i
 <br/>Javidx9 Video's explaining the DDA algorithm
 <br />["Super Fast Ray Casting in Tiled Worlds using DDA"](https://youtu.be/NbSee-XM7WA?si=MkdTqBw5MWlGF6ej)
 
+# Love2d Libraries
+<br />Most of the library's used here can be found in ("Awesome Love2d")[https://github.com/love2d-community/awesome-love2d]
+
 
 
