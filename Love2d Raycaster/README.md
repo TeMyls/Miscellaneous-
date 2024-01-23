@@ -1,6 +1,6 @@
 # Raycasting 
 Raycasting is an old technique used to render a fake 3d environment from a map in the form of a array.
-<br />![](https://imgur.com/a/f2CHshy)
+<br />![](https://github.com/TeMyls/Miscellaneous-/blob/main/Love2d%20Raycaster/raycaster.gif)
 <br />This technique uses an extremely fast algorithm know. as Digital Differential Analyser or the DDA Algorithm.
 <br />It's done by projecting lines or rays from the position of the player in the map until they collide with a wall, which is represented by a number in the array. Then the distance is used to project lines or rectangles of various sizes onto the screen. This simulates 3d. 
 
