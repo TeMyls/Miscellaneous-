@@ -10,4 +10,8 @@ You may have noticed there are two testmap files, the main difference between th
 In both methods the centers of two room is used. In one method a the two centers form the edges of a rectangle, which the top and left or the bottom and right of the rectangle will become tunnels. In another method, the midpoint of the north, south, east, and west of each rooms are derived from the coordinates of the center of the room. Then a distance check is preformed between the two rooms and whichever midpoints are closest to each other are used to make to random points along the wall the midpoints aligned with. Then depending on the alignmenent of those two points, be they on the north, south, east, or west wall. They will form different types of tunnels. If the two directions are opposite of one another, say a north wall connecting to a south wall, one straight tunnel will be drawn extending from the wall's alignment, onces these tunnels are equal they are connected. If the two alignments aren't directly opposite, they do the same thing mentioned in the first method, but instead of using the two centers of the rooms as rectangle's edges. The two randomly chosing closest points are instead.
 
 
-![](https://github.com/TeMyls/Miscellaneous-/blob/main/Basic%20Dungeon%20Generation/TestMapvsTestMap3.png)
+![](https://github.com/TeMyls/Miscellaneous-/blob/main/Basic%20Dungeon%20Generation/TestMapvsTestMap3.png)<br />
+
+procgenmap.py uses the same principles, but instead of using a custom tunneling algorithm, it uses A-star/ A* to tunnel between rooms. This time its playable, using WASD keys generating rooms, it's a good skeleton for a roguelike I intend to use later.
+
+
