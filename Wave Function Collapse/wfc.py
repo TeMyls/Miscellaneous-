@@ -84,8 +84,8 @@ def display(arr):
 
 	
 def flood_fill_collapse(arr, row, col):
-	w = len(arr)
-	h = len(arr[0])
+	w = len(arr[0])
+	h = len(arr)
 	#direction vectors in array
 	#[up,right,down,left]
 	x_vectors = [0,-1,0,1]
