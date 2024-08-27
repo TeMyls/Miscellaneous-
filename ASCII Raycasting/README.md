@@ -1,6 +1,7 @@
 # Raycasting 
 Raycasting is an old technique used to render a fake 3d environment from a map in the form of a array.
 <br />This version uses ASCII characters of various pixel brightness and line length to represent distance to the player.
+<br /> WASD for movement, Q and E to turn 45 degrees.
 <br />![](https://github.com/TeMyls/Miscellaneous-/blob/main/ASCII%20Raycasting/array_raycast.gif)
 <br />This technique uses an extremely fast algorithm know. as Digital Differential Analyser or the DDA Algorithm.
 <br />It's done by projecting lines or rays from the position of the player in the map until they collide with a wall, which is represented by a number in the array. Then the distance is used to project lines or rectangles of various sizes onto the screen. This simulates 3d. 
