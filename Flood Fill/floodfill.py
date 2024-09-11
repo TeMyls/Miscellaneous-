@@ -1,6 +1,5 @@
 import time
-#import console
-import os
+import console
 
 def empty_map(rows,columns,empty_arr):
 	for i in range(rows):
@@ -61,8 +60,7 @@ def flood_fill_i(arr, row, col):
 			kyu.append((cur[0] - 1, cur[1]))
 			kyu.append((cur[0], cur[1] + 1))
 			kyu.append((cur[0], cur[1] - 1))
-			os.system("cls")
-			#console.clear()
+			console.clear()
 			symbol_display(arr)
 			
 			time.sleep(.1)
@@ -86,8 +84,7 @@ def floodFillHelper(image, x, y, color, newColor):
 
 	if image[x][y] == color:
 		image[x][y] = newColor
-		os.system("cls")
-		#console.clear()
+		console.clear()
 		symbol_display(arr)
 		
 		time.sleep(.1)
@@ -110,5 +107,5 @@ def flood_fill_r(image, x, y, newColor):
 	
 	
 arr = empty_map(16,16,[])
-#flood_fill_i(arr,10,2)
-flood_fill_r(arr,10,2,1)
+flood_fill_i(arr,10,2)
+#flood_fill_r(arr,10,2,1)
