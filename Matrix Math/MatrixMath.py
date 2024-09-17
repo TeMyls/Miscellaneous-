@@ -10,6 +10,28 @@ def display(arr2d):
 	for i in arr2d:
 		print(i)
 		
+def translate_origin_2d(x , y)		
+	"""
+	mean to rotating points that aren't attached to the origin by their centers
+	
+	the output of this function is to be multiples my a matric like
+	
+	[[x],
+	[y],
+	[1]]
+	
+	
+	
+	"""
+	rotation_o = [
+		[1, 0, -x],
+		[0, 1, -y],
+		[0, 0, 1]
+		]
+	return rotation_o
+		
+
+		
 def xy_rotate2d_cw(radians):
 	#clockwise rotation
 	#any angle
