@@ -11,18 +11,18 @@ def display(arr2d):
 		print(i)
 		
 def translate_origin_2d(x , y)		
-	"""
-	mean to rotating points that aren't attached to the origin by their centers
 	
-	the output of this function is to be multiples my a matric like
+	#mean to rotating points that aren't attached to the origin by their centers
 	
-	[[x],
-	[y],
-	[1]]
+	#the output of this function is to be multiples my a matric like
+	
+	#[[x],
+	#[y],
+	#[1]]
 	
 	
 	
-	"""
+	
 	rotation_o = [
 		[1, 0, -x],
 		[0, 1, -y],
