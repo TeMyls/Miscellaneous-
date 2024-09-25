@@ -1,5 +1,4 @@
 import random
-import console
 import math
 
 
