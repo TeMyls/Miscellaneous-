@@ -312,33 +312,33 @@ def matrix_multiply(a_matrix, b_matrix):
 	display(b_matrix)
 	
 	result = []
-	if rows_a == cols_b or cols_a == rows_b:
-		a = []
-		b = []
-		if rows_a == cols_b and cols_a == rows_b:
-			if rows_a + cols_b < cols_a + rows_b:
-				a = b_matrix
-				b = a_matrix
-			else:
-				a = a_matrix
-				b = b_matrix 
-		elif rows_a == cols_b:
-			a = a_matrix
-			b = b_matrix
 
-		elif cols_a == rows_b:
+	a = []
+	b = []
+	if rows_a == cols_b and cols_a == rows_b:
+		if rows_a + cols_b < cols_a + rows_b:
 			a = b_matrix
 			b = a_matrix
-			
-		for by in range(len(b)):
-			new_row = []
-			for ax in range(len(a[0])):
-				product = 0
-				for bx in range(len(b[0])):
-					#print(a[bx][ax]," times ", b[by][bx])
-					product += a[bx][ax] * b[by][bx]
-				new_row.append(product)
-			result.append(new_row)
+		else:
+			a = a_matrix
+			b = b_matrix 
+	elif rows_a == cols_b:
+		a = a_matrix
+		b = b_matrix
+
+	elif cols_a == rows_b:
+		a = b_matrix
+		b = a_matrix
+		
+	for by in range(len(b)):
+		new_row = []
+		for ax in range(len(a[0])):
+			product = 0
+			for bx in range(len(b[0])):
+				#print(a[bx][ax]," times ", b[by][bx])
+				product += a[bx][ax] * b[by][bx]
+			new_row.append(product)
+		result.append(new_row)
 					
 				
 			
