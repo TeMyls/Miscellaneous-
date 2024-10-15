@@ -1,1 +1,2 @@
-# A repo for Matrix Math functions I've written 
+# A library of Matrix math functions I've written 
+Includes the general Affine transformation in both 2D and 3D
