@@ -6,7 +6,7 @@ Raycasting is an old technique used to render a fake 3d environment from a map i
 <br />This technique uses an extremely fast algorithm know. as Digital Differential Analyser or the DDA Algorithm.
 <br />It's done by projecting lines or rays from the position of the player in the map until they collide with a wall, which is represented by a number in the array. Then the distance is used to project lines or rectangles of various sizes onto the screen. This simulates 3d. 
 <br /> array_raycast.py is the old version without classes, raycast_array.py is the new version with classes and other minor improvements
-
+<br />Also if an infinite loop is encountered, click the highlighted area in the console, and press CTRL + C to Keyboard Interrupt
 
 
 
