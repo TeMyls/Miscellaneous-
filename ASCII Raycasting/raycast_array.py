@@ -386,7 +386,7 @@ class MapRenderer:
 			#DDA by a fixed value
 			#by dividing it's increments by a precision value'
 			#the resulting line or raycast drawn will be more accurate to the true distance it covers
-			precision = 128
+			precision = 300
 			raycos = math.cos(ang + self.degrees_to_radians(player.angle))/precision
 			
 			raysin = math.sin(ang + self.degrees_to_radians(player.angle))/precision
@@ -426,7 +426,7 @@ class MapRenderer:
 			self.draw_vertical_line(display_grid,i,choice_color,line_len)
 			#floor drawing
 			#
-			self.render_floors(i,display_grid,map_grid,line_len,angles[i],raycos,raysin,player)
+			#self.render_floors(i,display_grid,map_grid,line_len,angles[i],raycos,raysin,player)
 			
 			
 		
@@ -507,7 +507,9 @@ class MapRenderer:
 				#setting the ground to the player color
 				self.map_grid[self.player.y][self.player.x] = player_color
 			
-			
+			if letter == "x":
+				self.player.playing = False
+				print("Quitted")
 			
 			
 		
@@ -525,32 +527,9 @@ class GameLoop:
 		self.map_handler.map_grid[self.player.y][self.player.x] = player_color
 		while self.player.playing:
 			self.map_handler.update()
-			#map_display = empty_map(cols,rows, floor_color)
-		
-			
-			#print(player)
-			
-			
-			
-			
-			
-				
-			
-			
-			
-			#symbol_display(map_display)
-			
-			#print("Commands: \n \'W\':Foward \'S\':Back \'Q\':Rotate Right \n \'A\':Left \'D\':Right \'E\':Rotate Left \n \'X\':Quit \n ")
-			
-					
-					
-				
-					
-				
-			
-			#os.system('cls')
-			#console.clear()
-			#map_display.clear()
+
+
+
 _true_map = [
 	
 	[0,0,0,0,0],
@@ -601,8 +580,8 @@ true_map = [
 
 
 
-rows = 12
-cols = 26
+rows = 50
+cols = 100
 display_map = empty_map(rows,cols,floor_color)
 				
 GameLoop(display_map, true_map).run()
