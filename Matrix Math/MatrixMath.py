@@ -215,35 +215,35 @@ def matrix_addition(a_matrix, b_matrix):
 	return result
 	
 def scalar_matrix_multiply(scalar, matrix):
-	rows = len(matrix)
-	cols = len(matrix[0])
+	rows_a = len(matrix)
+	cols_a = len(matrix[0])
 	
 	
-	result = new_matrix(rows,cols)
+	result = new_matrix(rows_a,cols_a)
 	
 	for y in range(rows_a):
 		product = 0
 		for x in range(cols_a):
 			product = matrix[y][x] * scalar
 			
-	for i in result:
-		print(i)
+	#for i in result:
+	#	print(i)
 	return result
 	
 def scalar_matrix_divide(scalar, matrix):
-	rows = len(matrix)
-	cols = len(matrix[0])
+	rows_a = len(matrix)
+	cols_a = len(matrix[0])
 	
 	
-	result = new_matrix(rows,cols)
+	result = new_matrix(rows_a,cols_a)
 	
 	for y in range(rows_a):
 		product = 0
 		for x in range(cols_a):
 			product = matrix[y][x] / scalar
 			
-	for i in result:
-		print(i)
+	#for i in result:
+		#print(i)
 	return result
 			
 			
