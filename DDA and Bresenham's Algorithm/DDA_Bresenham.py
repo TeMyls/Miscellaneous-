@@ -45,22 +45,14 @@ def symbol_display(arr):
 	print(h)
 
 
-
 def DDA(x0, y0, x1, y1): 
 
 	# find absolute differences 
 	dx = x1 - x0
 	dy = y1 - y0
 	# find maximum difference 
-	
-	
-	steps = 0
-	
-	if abs(dx) >= abs(dy):
-		steps = abs(dx)
-	else:
-		steps = abs(dy)
-		
+
+	steps = max(abs(dx), abs(dy))
 	
 	# calculate the increment in x and y 
 	xinc = dx/steps 
@@ -73,7 +65,7 @@ def DDA(x0, y0, x1, y1):
 	coorinates = [] 
 
 	coorinates.append([x, y]) 
-	for i in range(steps): 
+	for _ in range(steps): 
 		
 		
 		
@@ -85,47 +77,40 @@ def DDA(x0, y0, x1, y1):
 		coorinates.append([math.floor(x), math.floor(y)]) 
 		
 	return coorinates
-	
-def DDA_raycast(grid, x0, y0, x1, y1, max_dist): 
 
-	# find absolute differences 
-	dx = abs(x0 - x1) 
-	dy = abs(y0 - y1) 
-	# find maximum difference 
-	steps = max(dx, dy) 
+def DDA_3D(x0, y0, z0, x1, y1, z1):
+	# Find absolute differences
+	dx = x1 - x0
+	dy = y1 - y0
+	dz = z1 - z0
 
-	# calculate the increment in x and y 
-	x_inc = dx/steps 
-	y_inc = dy/steps 
+	# Find the maximum difference to determine the number of steps
+	steps = max(abs(dx), abs(dy), abs(dz))
 
-	# start with 1st point 
-	x = float(x0) 
-	y = float(y0) 
-	# make a list for coordinates 
-	coorinates = [] 
+	# Calculate the increments for x, y, and z
+	xinc = dx / steps
+	yinc = dy / steps
+	zinc = dz / steps
+
+	# Start with the first point
+	x, y, z = x0, y0, z0
+
+	# List to store coordinates
+	coordinates = []
+
+	# Append the initial point
+	coordinates.append([math.floor(x), math.floor(y), math.floor(z)])
+
+	# Loop to calculate points
+	for _ in range(int(steps)):
+		x += xinc
+		y += yinc
+		z += zinc
+		coordinates.append([math.floor(x), math.floor(y), math.floor(z)])
+
+	return coordinates
 	
-	og_tile = grid[math.floor(y)][math.floor(x)]
-	cur_tile = og_tile
-	valid_tile = floor_color 
-	while cur_tile == og_tile or cur_tile == valid_tile:
-		
-		
-		
-		x = x + x_inc 
-		y = y + y_inc 
-		total_dist = math.sqrt(math.pow((x0 - x),2) +  math.pow((y0 - y),2))
-		cur_tile = grid[math.floor(y)][math.floor(x)]
-		
-		if total_dist >= max_dist:
-			break
-		
-	
-	
-		# append the x,y coordinates in respective list 
-		#coorinates.append([x, y]) 
-		# increment the values 
-		
-	#return coorinates
+
 
 def bresenham_circle(x0, y0, radius):
 	x = radius
@@ -212,7 +197,7 @@ def bresenham_line(start: tuple[int, int], end: tuple[int, int]) -> list[tuple[i
 		points.reverse()
 	return points
 	
-blank = empty_map(10,10,[])
+blank = empty_map(20,20,[])
 possible_tiles = []
 for y in range(len(blank) - 1):
 	for x in range(len(blank[y])):
