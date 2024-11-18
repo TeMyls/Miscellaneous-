@@ -3,7 +3,7 @@ import math
 import time
 #import console
 import os
-#from array_raycast import *
+
 
 
 filled_color = 1
