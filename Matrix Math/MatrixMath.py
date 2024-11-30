@@ -1,5 +1,4 @@
 import random
-import console
 import math
 import numpy as np
 
@@ -46,12 +45,12 @@ def blank_matrix2D():
 	a matrix that would do nothing when multipled
 	puts transforations in context
 	"""
-	blank_matrix = [
+	rotation_matrix = [
 		[1, 0, 0],
 		[0, 1, 0],
 		[0, 0, 1]
 		]
-	return blank_matrix
+	return rotation_matrix
 
 def translation_matrix2D(tx , ty):
 	"""
@@ -116,7 +115,7 @@ def blank_matrix3D():
 		[1, 0, 0, 0],
 		[0, 1, 0, 0],
 		[0, 0, 1, 0],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return blank_matrix
 	
@@ -126,7 +125,7 @@ def reflection_matrix3D(rx,ry,rz):
 		[rx, 0, 0, 0],
 		[0, ry, 0, 0],
 		[0, 0, rz, 0],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return reflect_matrix
 	
@@ -135,7 +134,7 @@ def scale_matrix3D(sx, sy, sz):
 		[sx, 0, 0, 0],
 		[0, sy, 0, 0],
 		[0, 0, sz, 0],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return scale_matrix
 	
@@ -144,7 +143,7 @@ def translation_matrix3D(tx, ty, tz):
 		[1, 0, 0, tx],
 		[0, 1, 0, ty],
 		[0, 0, 1, tz],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return translation_matrix
 	
@@ -153,7 +152,7 @@ def shear_matrix3D(sxy,sxz,syz,syx,szx,szy):
 		[1, sxy, sxz, 0],
 		[syx, 1, syz, 0],
 		[szx, szy, 1, 0],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return shear_matrix
 	
@@ -165,7 +164,7 @@ def x_rotation_matrix3D(radians):
 		[1, 0, 0, 0],
 		[0, c, -s, 0],
 		[0, s, c, 0],
-		[1, 0, 0, 1]
+		[0, 0, 0, 1]
 		]
 	return rotation_matrix
 	
@@ -184,8 +183,6 @@ def z_rotation_matrix3D(radians):
 	c = math.cos(radians)
 	s = math.sin(radians)
 	rotation_matrix = [
-		
-		
 		[c, -s, 0, 0],
 		[s, c, 0, 0],
 		[0, 0, 1, 0],
@@ -205,48 +202,48 @@ def matrix_addition(a_matrix, b_matrix):
 		print("Empty")
 	
 	result = new_matrix(rows_a,cols_a)
-	print(a_matrix)
-	print(b_matrix)
+	#print(a_matrix)
+	#print(b_matrix)
 	for y in range(rows_a):
 		product = 0
 		for x in range(cols_a):
 			product = a_matrix[y][x] + b_matrix[y][x]
 			result[y][x] = product
 			
-	for i in result:
-		print(i)
+	#for i in result:
+	#	print(i)
 	return result
 	
 def scalar_matrix_multiply(scalar, matrix):
-	rows = len(matrix)
-	cols = len(matrix[0])
+	rows_a = len(matrix)
+	cols_a = len(matrix[0])
 	
 	
-	result = new_matrix(rows,cols)
+	result = new_matrix(rows_a,cols_a)
 	
-	for y in range(rows):
+	for y in range(rows_a):
 		product = 0
-		for x in range(cols):
+		for x in range(cols_a):
 			product = matrix[y][x] * scalar
 			
-	for i in result:
-		print(i)
+	#for i in result:
+	#	print(i)
 	return result
 	
 def scalar_matrix_divide(scalar, matrix):
-	rows = len(matrix)
-	cols = len(matrix[0])
+	rows_a = len(matrix)
+	cols_a = len(matrix[0])
 	
 	
-	result = new_matrix(rows,cols)
+	result = new_matrix(rows_a,cols_a)
 	
-	for y in range(rows):
+	for y in range(rows_a):
 		product = 0
-		for x in range(cols):
+		for x in range(cols_a):
 			product = matrix[y][x] / scalar
 			
-	for i in result:
-		print(i)
+	#for i in result:
+		#print(i)
 	return result
 			
 			
@@ -266,16 +263,16 @@ def matrix_subtraction(a_matrix, b_matrix):
 		print("Empty")
 	
 	result = new_matrix(rows_a,cols_a)
-	print(a_matrix)
-	print(b_matrix)
+	#print(a_matrix)
+	#print(b_matrix)
 	for y in range(rows_a):
 		product = 0
 		for x in range(cols_a):
 			product = a_matrix[y][x] + b_matrix[y][x]
 			result[y][x] = product
 			
-	for i in result:
-		print(i)
+	#for i in result:
+	#	print(i)
 	return result
 	
 
@@ -315,33 +312,33 @@ def matrix_multiply(a_matrix, b_matrix):
 	display(b_matrix)
 	
 	result = []
-	if rows_a == cols_b or cols_a == rows_b:
-		a = []
-		b = []
-		if rows_a == cols_b and cols_a == rows_b:
-			if rows_a + cols_b < cols_a + rows_b:
-				a = b_matrix
-				b = a_matrix
-			else:
-				a = a_matrix
-				b = b_matrix 
-		elif rows_a == cols_b:
-			a = a_matrix
-			b = b_matrix
 
-		elif cols_a == rows_b:
+	a = []
+	b = []
+	if rows_a == cols_b and cols_a == rows_b:
+		if rows_a + cols_b < cols_a + rows_b:
 			a = b_matrix
 			b = a_matrix
-			
-		for by in range(len(b)):
-			new_row = []
-			for ax in range(len(a[0])):
-				product = 0
-				for bx in range(len(b[0])):
-					#print(a[bx][ax]," times ", b[by][bx])
-					product += a[bx][ax] * b[by][bx]
-				new_row.append(product)
-			result.append(new_row)
+		else:
+			a = a_matrix
+			b = b_matrix 
+	elif rows_a == cols_b:
+		a = a_matrix
+		b = b_matrix
+
+	elif cols_a == rows_b:
+		a = b_matrix
+		b = a_matrix
+		
+	for by in range(len(b)):
+		new_row = []
+		for ax in range(len(a[0])):
+			product = 0
+			for bx in range(len(b[0])):
+				#print(a[bx][ax]," times ", b[by][bx])
+				product += a[bx][ax] * b[by][bx]
+			new_row.append(product)
+		result.append(new_row)
 					
 				
 			
@@ -350,6 +347,7 @@ def matrix_multiply(a_matrix, b_matrix):
 	print()
 	display(result)
 	return result		
+
 	
 			
 A = [
@@ -407,9 +405,9 @@ print(np.dot(np.array(A), np.array(B)))
 
 #matrix_multiply(matrix_a, matrix_b)
 #print(np.dot(np.array(matrix_b), #np.array(matrix_a)))
-v = set_matrix2D(2, 3)
+v = set_matrix3D(2, 3, 4)
 display(v)
-print(get_2D_vertices(v))
+print(get_3D_vertices(v))
 #print(None)
 #matrix_multiply(matrix_b, matrix_a)
 
