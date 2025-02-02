@@ -1,5 +1,5 @@
 import math
-#same as matrixmath lua, but doesn't constantly create lists
+#same as matrixmath py, but doesn't constantly create lists
 #just returns points altered
 #slightly less intuitive than matrix multiplication uses 2d lists
 
@@ -40,7 +40,7 @@ def scale_2D(sx, sy, x, y):
 def reflect_2D(rx, ry, x, y):
     _x = x * rx
     _y = y * ry
-    return x, y 
+    return _x, _y 
 
 
 def scale_3D(sx, sy, sz, x, y, z):
