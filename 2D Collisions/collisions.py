@@ -35,7 +35,7 @@ def point_circle(px, py, cx, cy, r):
   return False
 
 
-def circle_circle(cx1, cy1, cr1, cx2, cy2, cr2)
+def circle_circle(cx1, cy1, cr1, cx2, cy2, cr2):
   #get distance between the circle's centers
   dist = get_distance(cx1, cy1, cx2, cy2)
   #if the distance is less the circle's
@@ -176,7 +176,7 @@ def polygon_point(vertices, px, py):
   #the least amount of vertex a shape can have is 3, a triangle, meaning 3 pairs of x y coords
   collision = False
 
-  if vertices >= 6:
+  if len(vertices) >= 6:
     v_len = (len(vertices))
     for i in range(v_len):
     
@@ -214,7 +214,7 @@ def polygon_circle(vertices, cx, cy, r):
   #the least amount of vertex a shape can have is 3, a triangle, meaning 3 pairs of x y coords
   collision = False
 
-  if vertices >= 6:
+  if len(vertices) >= 6:
     v_len = (len(vertices))
     for i in range(v_len):
     
@@ -251,7 +251,7 @@ def polygon_rectangle(vertices, rx, ry, rw, rh):
   #the least amount of vertex a shape can have is 3, a triangle, meaning 3 pairs of x y coords
   collision = False
 
-  if vertices >= 6:
+  if len(vertices) >= 6:
     v_len = (len(vertices))
     for i in range(v_len):
     
@@ -286,7 +286,7 @@ def polygon_line(vertices, x1, y1, x2, y2):
   #the least amount of vertex a shape can have is 3, a triangle, meaning 3 pairs of x y coords
   collision = False
 
-  if vertices >= 6:
+  if len(vertices) >= 6:
     v_len = (len(vertices))
     for i in range(v_len):
     
@@ -321,7 +321,7 @@ def polygon_polygon(vertices, vertices_2):
   #the least amount of vertex a shape can have is 3, a triangle, meaning 3 pairs of x y coords
   collision = False
 
-  if vertices >= 6:
+  if len(vertices) >= 6:
     v_len = (len(vertices))
     for i in range(v_len):
     
