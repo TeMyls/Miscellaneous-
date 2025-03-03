@@ -178,30 +178,18 @@ def polygon_point(vertices, px, py):
 
   if len(vertices) >= 6:
     v_len = (len(vertices))
-    for i in range(v_len):
-    
+    for i in range(0, v_len, 2):
       #current and next index
       cx_ind = i
       cy_ind = i + 1
-      nx_ind = i + 2
-      ny_ind = i + 3
-      if nx_ind > v_len - 1: 
-        nx_ind = nx_ind % v_len - 1
-      
-
-      if ny_ind > v_len - 1: 
-        ny_ind = ny_ind % v_len - 1
-      
-
-      
+      nx_ind = (i + 2) % (v_len)
+      ny_ind = (i + 3) % (v_len)
 
       vcx = vertices[cx_ind]
       vcy = vertices[cy_ind]
       vnx = vertices[nx_ind]
       vny = vertices[ny_ind]
     
-
-
       if ((vcy >= py and vny < py) or (vcy < py and vny >= py)) and px < (vnx-vcx)*(py-vcy) / (vny-vcy)+vcx:
           collision = not collision
 
@@ -216,28 +204,18 @@ def polygon_circle(vertices, cx, cy, r):
 
   if len(vertices) >= 6:
     v_len = (len(vertices))
-    for i in range(v_len):
-    
+    for i in range(0, v_len, 2):
       #current and next index
       cx_ind = i
       cy_ind = i + 1
-      nx_ind = i + 2
-      ny_ind = i + 3
-      if nx_ind > v_len - 1: 
-        nx_ind = nx_ind % v_len - 1
-      
-
-      if ny_ind > v_len - 1: 
-        ny_ind = ny_ind % v_len - 1
-      
-
-      
+      nx_ind = (i + 2) % (v_len)
+      ny_ind = (i + 3) % (v_len)
 
       vcx = vertices[cx_ind]
       vcy = vertices[cy_ind]
       vnx = vertices[nx_ind]
       vny = vertices[ny_ind]
-      
+    
       collision = line_circle(vcx, vcy, vnx, vny, cx, cy, r)
       if collision: 
         return True
@@ -253,26 +231,18 @@ def polygon_rectangle(vertices, rx, ry, rw, rh):
 
   if len(vertices) >= 6:
     v_len = (len(vertices))
-    for i in range(v_len):
-    
+    for i in range(0, v_len, 2):
       #current and next index
       cx_ind = i
       cy_ind = i + 1
-      nx_ind = i + 2
-      ny_ind = i + 3
-      if nx_ind > v_len - 1: 
-        nx_ind = nx_ind % v_len - 1
-      
-
-      if ny_ind > v_len - 1: 
-        ny_ind = ny_ind % v_len - 1
-      
+      nx_ind = (i + 2) % (v_len)
+      ny_ind = (i + 3) % (v_len)
 
       vcx = vertices[cx_ind]
       vcy = vertices[cy_ind]
       vnx = vertices[nx_ind]
       vny = vertices[ny_ind]
-      
+    
       collision = line_rectangle(vcx, vcy, vnx, vny, rx, ry, rw, rh)
       if collision: 
         return True
@@ -288,26 +258,18 @@ def polygon_line(vertices, x1, y1, x2, y2):
 
   if len(vertices) >= 6:
     v_len = (len(vertices))
-    for i in range(v_len):
-    
+    for i in range(0, v_len, 2):
       #current and next index
       cx_ind = i
       cy_ind = i + 1
-      nx_ind = i + 2
-      ny_ind = i + 3
-      if nx_ind > v_len - 1: 
-        nx_ind = nx_ind % v_len - 1
-      
+      nx_ind = (i + 2) % (v_len)
+      ny_ind = (i + 3) % (v_len)
 
-      if ny_ind > v_len - 1: 
-        ny_ind = ny_ind % v_len - 1
-      
-      
       vcx = vertices[cx_ind]
       vcy = vertices[cy_ind]
       vnx = vertices[nx_ind]
       vny = vertices[ny_ind]
-      
+    
       collision = line_line(x1, y1, x2, y2, vcx, vcy, vnx, vny)
       if collision: 
         return True
@@ -323,24 +285,18 @@ def polygon_polygon(vertices, vertices_2):
 
   if len(vertices) >= 6:
     v_len = (len(vertices))
-    for i in range(v_len):
-    
+    for i in range(0, v_len, 2):
       #current and next index
       cx_ind = i
       cy_ind = i + 1
-      nx_ind = i + 2
-      ny_ind = i + 3
-      if nx_ind > v_len - 1: 
-        nx_ind = nx_ind % v_len - 1
-      
-      if ny_ind > v_len - 1: 
-        ny_ind = ny_ind % v_len - 1
+      nx_ind = (i + 2) % (v_len)
+      ny_ind = (i + 3) % (v_len)
 
       vcx = vertices[cx_ind]
       vcy = vertices[cy_ind]
       vnx = vertices[nx_ind]
       vny = vertices[ny_ind]
-      
+    
       collision = polygon_line(vertices_2, vcx, vcy, vnx, vny)
       if collision:
         return True
