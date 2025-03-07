@@ -151,6 +151,17 @@ def line_line(x1, y1, x2, y2, x3, y3, x4, y4):
   
   return False
 
+def line_line_intersection(x1, y1, x2, y2, x3, y3, x4, y4):
+  #calculate the distance to the intersection point
+  uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
+  uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
+  #if uA and uB are between 0-1, lines are colliding
+  if uA >= 0 and uA <= 1 and uB >= 0 and uB <= 1: 
+    intersection_x = x1 + (uA * (x2 - x1))
+    intersection_y = y1 + (uA * (y2 - y1))
+    return [intersection_x, intersection_y]
+  
+  return []
 
 
 
