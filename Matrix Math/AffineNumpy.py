@@ -84,7 +84,7 @@ class Vertex():
         
         #print('nump')
         #print(XnY)
-        self.set_coords(XnY[0], XnY[1])
+        self.set_coords(XnY[0, 0], XnY[1, 0])
 
 grid = empty_map(30, 30, wall_color)
 
