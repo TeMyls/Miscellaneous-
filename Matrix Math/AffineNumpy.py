@@ -1,9 +1,9 @@
-
 from MatrixMath import *
 #from numpy import eye, dot, linalg, array, uint8
 #from numpy import array, uint8, linalg, radians
 import numpy as np
 import math
+import random
 
 
 floor_color = 1
@@ -33,7 +33,7 @@ def symbol_display(arr):
 	h=''
 	for row in arr:
 		for col in row:
-			h += colors[col] + " "
+			h += colors[col]
 		h = h + '\n'
 	print(h)
 
@@ -88,7 +88,7 @@ class Vertex():
 
 grid = empty_map(30, 30, wall_color)
 
-v = Vertex(10,5)
+v = Vertex(20,10)
 print(v)
 ox = v.get_X()
 oy = v.get_Y()
@@ -98,12 +98,17 @@ cx, cy = math.floor(len(grid[0])/2), math.floor(len(grid)/2)
 grid[cy][cx] = other_color
 symbol_display(grid)
 print(cx, cy)
+angle = random.randint(0, 360)
 #v.set_coords(2, 10)
 tm = np.array(
     translation_matrix2D(-cx, -cy)
 )
 tfm = np.array(
-    rotation_matrix2D(np.radians(180))
+    rotation_matrix2D(
+    	np.radians(
+    			angle
+    		)
+    	)
 )
 mt = np.array(
     translation_matrix2D(cx, cy)
@@ -113,9 +118,8 @@ nx = v.get_X()
 ny = v.get_Y() 
 if in_bounds(nx, ny, len(grid[0]), len(grid)):
     grid[ny][nx] = player_color
-print()
+print(f"Angle: {angle}")
 
 print(v)
 symbol_display(grid)
-
 
