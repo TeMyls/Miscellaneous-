@@ -15,7 +15,7 @@ def dict_tree_bfs(dct,node):
 	print(visited)
 	
 def dict_tree_dfs(dct,node):
-	visited = []
+	visited = [node]
 	stack = [node]
 	print(dct)
 	
@@ -25,28 +25,13 @@ def dict_tree_dfs(dct,node):
 		visited.append(item)
 		if dct.get(item):
 			for i in range(len(dct[item]) - 1,-1,-1):
-				
 				if dct[item][i] not in visited:
 					stack.append(dct[item][i])
 					
-				
-				
-		
-	
-			
-			
-			
-		
-			
-						
-		
-	
+
 	print(visited)
 
 tree_dict_bfs = {'a':['b','c'],'b':['d'],'c':['e','f'],'d':[],'e':[],'f':[]}
-
 tree_dict_dfs = {'a':['b','d'],'b':['c'],'c':[],'d':['e','f'],'e':[],'f':['g'],'g':[]}
-
-
 
 dict_tree_dfs(tree_dict_dfs,'a')
