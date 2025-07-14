@@ -26,7 +26,7 @@ def dfs(dct,node):
 			for i in range(len(dct[item]) - 1,-1,-1):
 				if dct[item][i] not in visited:
 					stack.append(dct[item][i])
-					visited.append(i)
+					visited.append(dct[item][i])
 					
 
 	print(visited)
@@ -49,5 +49,7 @@ tree_dfs = {
 		'g':[]
 		}
 
-dict_tree_bfs(tree_bfs,'b')
-dict_tree_dfs(tree_dfs,'a')
+print('tree bfs')
+bfs(tree_bfs,'a')
+print('tree dfs')
+dfs(tree_dfs,'a')
