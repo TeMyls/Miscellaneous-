@@ -1,20 +1,20 @@
-def dict_tree_bfs(dct,node):
+def bfs(dct,node):
 	visited = [node]
-	kyu = [node]
+	queue = [node]
 	print(dct)
 	
-	while kyu:
-		print(kyu)
-		item = kyu.pop(0)
+	while queue:
+		print(queue)
+		item = queue.pop(0)
 		if dct.get(item):
 			for i in dct[item]:
 				if i not in visited:
-					kyu.append(i)
+					queue.append(i)
 					visited.append(i)
 		
 	print(visited)
 	
-def dict_tree_dfs(dct,node):
+def dfs(dct,node):
 	visited = [node]
 	stack = [node]
 	print(dct)
@@ -22,16 +22,32 @@ def dict_tree_dfs(dct,node):
 	while stack:
 		print(stack)
 		item = stack.pop()
-		visited.append(item)
 		if dct.get(item):
 			for i in range(len(dct[item]) - 1,-1,-1):
 				if dct[item][i] not in visited:
 					stack.append(dct[item][i])
+					visited.append(i)
 					
 
 	print(visited)
 
-tree_dict_bfs = {'a':['b','c'],'b':['d'],'c':['e','f'],'d':[],'e':[],'f':[]}
-tree_dict_dfs = {'a':['b','d'],'b':['c'],'c':[],'d':['e','f'],'e':[],'f':['g'],'g':[]}
+tree_bfs = {
+		'a':['b','c'],
+		'b':['d'],
+		'c':['e','f'],
+		'd':[],
+		'e':[],
+		'f':[]
+		}
+tree_dfs = {
+		'a':['b','d'],
+		'b':['c'],
+		'c':[],
+		'd':['e','f'],
+		'e':[],
+		'f':['g'],
+		'g':[]
+		}
 
-dict_tree_dfs(tree_dict_dfs,'a')
+dict_tree_bfs(tree_bfs,'b')
+dict_tree_dfs(tree_dfs,'a')
