@@ -208,6 +208,9 @@ int main() {
     insertMap(&map, "banana", 7);
     printf("apple: %d\n", getMap(&map, "apple"));
     printf("banana: %d\n", getMap(&map, "banana"));
+    deleteMap(&map, "apple");
+    printf("apple after delete: %d\n", getMap(&map, "apple")); // -1
+
     printf("\n");
 
     // --- Linked List ---
