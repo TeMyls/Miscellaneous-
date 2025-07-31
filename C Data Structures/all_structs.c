@@ -74,6 +74,29 @@ int getMap(HashMap *map, const char *key) {
     return -1;
 }
 
+int deleteMap(HashMap *map, const char *key) {
+    unsigned int idx = hash(key);
+    Entry *entry = map->buckets[idx];
+    Entry *prev = NULL;
+
+    while (entry) {
+        if (strcmp(entry->key, key) == 0) {
+            if (prev) {
+                prev->next = entry->next;
+            } else {
+                map->buckets[idx] = entry->next;
+            }
+            free(entry->key);
+            free(entry);
+            return 1; // Success
+        }
+        prev = entry;
+        entry = entry->next;
+    }
+
+    return 0; // Not found
+}
+
 /// --- 3. Singly Linked List ---
 
 typedef struct Node {
