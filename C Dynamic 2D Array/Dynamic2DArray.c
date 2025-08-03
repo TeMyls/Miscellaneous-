@@ -22,20 +22,25 @@ void fillGrid(Grid *g){
     }
 }
 
-Grid initGrid(int rows, int cols){
+char**createMatrix (int rows, int cols){
+	char **arr = (char **)malloc(rows * sizeof(
+char *));
+	// Allocate memory for each row (1D array)
+	for (int i = 0; i < rows; i++){
+		arr[i] = (char *)malloc((cols + 1) * sizeof(char));
+	}
+	return arr;
+}
 
-
-    char **arr = (char **)malloc(rows * sizeof(char *));
-
-    // Allocate memory for each row (1D array)
-    for (int i = 0; i < rows; i++) {
-        //cols plus one to account for null terminator
-        arr[i] = (char *)malloc((cols + 1) * sizeof(char));
-    }
-
-    Grid newGrid = {arr, rows, cols};
-    fillGrid(&newGrid);
-    return newGrid;
+Grid initGrid(int rows, int cols, char c){
+	
+	Grid newGrid = {
+		createMatrix(rows, cols), 
+		rows, 
+		cols
+		};
+	fillGrid(&newGrid);
+	return newGrid;
 }
 
 void resizeGrid(Grid *g, int new_rows, int new_cols) {
