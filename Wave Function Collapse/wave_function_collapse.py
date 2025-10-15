@@ -42,7 +42,7 @@ colors = {
 	water_cell:'💧 ',
 	sand_cell:'🏝️ ',
 	tree_cell:'🌲 ',
-	dirt_cell:'🌴 '
+	dirt_cell:'🌱 '
 	
 	
 	
@@ -64,10 +64,6 @@ def in_bounds(x, y,grid_w,grid_h):
 def set_seed_tile(array_2d):
 	#position of starting tileoit
 	row,col = random.randint(0,len(array_2d)-1), random.randint(0,len(array_2d[0])-1)
-	#giving an initial value a random integer within our dictionary to represent a starting tile
-	val = random.randint(1, len(options))
-	#print(val,'\n',row,col
-	array_2d[row][col] = val
 	return row, col
 
 
@@ -104,25 +100,38 @@ def flood_fill_collapse(array_2d, row, col):
 	visited = []
 	queue = []
 	queue.append([row,col])
+	#print(array_2d[row][col])
 	#The first cell is initially an array pf choices
-	array_2d[row][col] = options[random.choice(uncollapsed)]
-	
+	#it is collapsed to an integer
+	array_2d[row][col] = random.choice(array_2d[row][col])
+	for i in range(len(x_vectors)):
+		y = row + y_vectors[i]
+		x = col + x_vectors[i]
+		if in_bounds(x,y,w,h):
+			#
+			array_2d[y][x] = options[array_2d[row][col]]
 	
 	while queue:
 		cur = queue.pop(0)
 		
 		if in_bounds(cur[1],cur[0],w,h) and  [cur[0],cur[1]] not in visited:
 			
+			
+			#print(visited)
 			# collapsing cell to a number
-			if array_2d[cur[0]][cur[1]]:
+			if type(array_2d[cur[0]][cur[1]]) == type([]):
+				#if its an array
 				array_2d[cur[0]][cur[1]] = random.choice( array_2d[cur[0]][cur[1]])
+			'''
 			else:
-				array_2d[cur[0]][cur[1]] = array_2d[cur[0]][cur[1]][0]
+				print('ye')
+				y, x = visited[-1]
+				array_2d[cur[0]][cur[1]] = array_2d[y][x]
+			'''
 				
 			
 			if visited:
-				#possible future values of X and Y depening on position
-				possibilities = []
+				#possible future values of X and Y depending on position
 				
 				
 				for i in range(len(x_vectors)):
@@ -148,15 +157,15 @@ def flood_fill_collapse(array_2d, row, col):
 							while idx_to_pop:
 								
 								idx = idx_to_pop.pop()
-								if len(neighbor) > 1:
-									neighbor.pop(idx)
+								#if len(neighbor) > 1:
+								neighbor.pop(idx)
 							
 
 			visited.append([cur[0],cur[1]])
 			
 			display_true(array_2d)
 			#display(array_2d)
-			#time.sleep(.015)
+			time.sleep(.015)
 			queue.append([cur[0] + 1, cur[1]])
 			queue.append([cur[0] - 1, cur[1]])
 			queue.append([cur[0], cur[1] + 1])
