@@ -1,7 +1,9 @@
 import random
 import time 
+#for windows
+import os
 #for pythonista
-import console
+#import console
 #1 water
 #only borders sand and itself
 #2 sand
