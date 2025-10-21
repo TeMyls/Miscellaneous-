@@ -60,11 +60,11 @@ void set_value1D(int *arr, int arr_len, int idx, int value) {
     arr[ abs( idx % arr_len )] = value; 
 }
 
-void print1DA( int rows, int cols, int *arr){
-	for(int i = 0;i < rows * cols; i++)
+void print1DA( int arr_len, int *arr){
+	for(int i = 0;i < arr_len; i++)
 	{
 		
-		printf("%d ", get_value1D(arr, rows*cols, i));
+		printf("%d ", get_value1D(arr, arr_len, i));
 		
 		
 	}
@@ -79,3 +79,27 @@ void print2DA( int rows, int cols, int *arr){
 		}
 		printf("\n");
 	}
+}
+
+
+ 
+int main(){
+	
+	Array_2d A2D = init2DA(8, 11);
+	print1DA(A2D.rows * A2D.cols, A2D.data);
+	print2DA(A2D.rows, A2D.cols, A2D.data);
+	
+	printf("\n");
+	
+	set_value1D(A2D.data, A2D.cols * A2D.rows, 4, -8);
+	
+	set_value2D(A2D.data, A2D.cols, A2D.rows, 5, 2, -7);
+	
+	print1DA(A2D.rows * A2D.cols, A2D.data);
+	print2DA(A2D.rows, A2D.cols, A2D.data);
+	
+	
+	free(A2D.data);
+	A2D.data = NULL;
+	return 0;
+}
