@@ -4,6 +4,7 @@ import time
 import os
 #for pythonista
 #import console
+
 #1 water
 #only borders sand and itself
 #2 sand
@@ -13,7 +14,7 @@ import os
 #4 dirt
 #only borders trees, sand and itself
 
-print("1 is water","2 is sand","3 is tree","4 is dirt", sep = "\n")
+#print("1 is water","2 is sand","3 is tree","4 is dirt", sep = "\n")
 
 #left,down,right,up
 
@@ -194,6 +195,7 @@ def wave_function_collapse(rows,cols):
 	print(msg)
 	arena = empty_map(rows,cols,uncollapsed)
 	x,y = set_seed_tile(arena)
+	display_true(arena)
 	flood_fill_collapse(arena,x,y)
 	print("1 is water","2 is sand","3 is tree","4 is dirt", sep = "\n")
 	print(options)
