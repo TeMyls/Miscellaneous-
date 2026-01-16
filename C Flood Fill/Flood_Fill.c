@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 
 typedef struct 
@@ -156,8 +157,11 @@ void floodFill(Array_2d *arr, int *start_coords, int filler) {
 
     while (queue_len > 0) {
         // Pop last pair
-        int cur_y = arrayPop(&queue, &queue_len, queue_len - 1);
-        int cur_x = arrayPop(&queue, &queue_len, queue_len - 1);
+        // Poping from 0 makes it a queue
+        // From queue_len - 1 makes it a stack
+        int cur_x = arrayPop(&queue, &queue_len, 0);
+        int cur_y = arrayPop(&queue, &queue_len, 0);
+        
 
         if (!in_bounds(cur_x, cur_y, arr->cols, arr->rows))
         {
@@ -179,7 +183,8 @@ void floodFill(Array_2d *arr, int *start_coords, int filler) {
         if (in_visited) continue;
 
         print2DA(arr->rows, arr->cols, arr->data);
-        printf("\n");
+        printf("Cur X: %d Cur Y:%d \n", cur_x, cur_y);
+        
         // Mark as visited
         visited = arrayAppend(visited, &v_len, cur_x);
         visited = arrayAppend(visited, &v_len, cur_y);
@@ -190,15 +195,19 @@ void floodFill(Array_2d *arr, int *start_coords, int filler) {
         // Add neighbors
         queue = arrayAppend(queue, &queue_len, cur_x + 1);
         queue = arrayAppend(queue, &queue_len, cur_y);
-
+        
+        queue = arrayAppend(queue, &queue_len, cur_x);
+        queue = arrayAppend(queue, &queue_len, cur_y - 1);
+        
         queue = arrayAppend(queue, &queue_len, cur_x - 1);
         queue = arrayAppend(queue, &queue_len, cur_y);
 
+
+        
+
+        
         queue = arrayAppend(queue, &queue_len, cur_x);
         queue = arrayAppend(queue, &queue_len, cur_y + 1);
-
-        queue = arrayAppend(queue, &queue_len, cur_x);
-        queue = arrayAppend(queue, &queue_len, cur_y - 1);
     }
 
     free(queue);
@@ -215,7 +224,21 @@ int main(){
 	//print1DA(A2D.rows * A2D.cols, A2D.data);
 	print2DA(A2D.rows, A2D.cols, A2D.data);
 	printf("\n");
-	int start[2] = {2, 3};
+	srand(time(NULL));   // Initialization, should only be called once.
+	int r1 = rand();      // Returns a pseudo-random integer between 0 and RAND_MAX.
+	int r2 = rand();      // Returns a pseudo-random integer between 0 and RAND_MAX.
+	int rx = (int) r1 % A2D.cols;
+	int ry = (int) r2 % A2D.rows;
+	
+	printf("rx %d ry %d\n", rx, ry);
+	int start[2] = {rx, ry};
+	//set_value2D(A2D.data, A2D.cols, A2D.rows, rx, ry, 7);
+	
+	//set_value2D(A2D.data, A2D.cols, A2D.rows, rx + 1, ry, 1);
+	//set_value2D(A2D.data, A2D.cols, A2D.rows, rx - 1, ry, 2);
+	//set_value2D(A2D.data, A2D.cols, A2D.rows, rx, ry + 1, 3);
+	//set_value2D(A2D.data, A2D.cols, A2D.rows, rx, ry - 1, 4);
+	
 	floodFill(&A2D, start , 5);
 	print2DA(A2D.rows, A2D.cols, A2D.data);
 	
