@@ -49,12 +49,13 @@ def lerp(a, b, percentage):
 	return a + (b - a) * clamp(percentage, 0, 1)
 	
 
-def r_bez(point_ls: list[float], points: [int], point: int) -> list[float]:
+def r_bez(point_ls: list[float], points: int, point: int) -> list[float]:
 	# the way bezier curves work is by linear interpolating(lerp)
-		# the value from one coordinate to another, getting a percentage between the two
+		# the value from one coordinate to another, getting an X-Y point at a percentage between the two
 		# these points are lerp-ed until the path of a single line is deduced
+	# Example
 	# 4 X-Y coordinate pairs have 3 lines between them
-	# when a value is connected inbetween these 3 lines sequentially you get 2 lines, then 1 line fron where each point on the found
+	# when a percentage value is connected inbetween these 3 lines sequentially you get 2 lines, then 1 line from where each point on the found
 	# this recurcise and iterative versions do exactly that, once the amount of points is reduced to 4 numbers, 2 X-Y pairs, a line
 			# the curve's coordinate at that percentage is found
 			
@@ -96,7 +97,7 @@ def r_bez(point_ls: list[float], points: [int], point: int) -> list[float]:
 
 	return r_bez(ls_point, points, point)
 	
-def i_bez(point_ls: list[float], points: [int], point: int) -> list[float]:
+def i_bez(point_ls: list[float], points: int point: int) -> list[float]:
 	
 	ln = len(point_ls)
 	
