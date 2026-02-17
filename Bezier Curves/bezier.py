@@ -97,7 +97,7 @@ def r_bez(point_ls: list[float], points: int, point: int) -> list[float]:
 
 	return r_bez(ls_point, points, point)
 	
-def i_bez(point_ls: list[float], points: int point: int) -> list[float]:
+def i_bez(point_ls: list[float], points: int, point: int) -> list[float]:
 	
 	ln = len(point_ls)
 	
