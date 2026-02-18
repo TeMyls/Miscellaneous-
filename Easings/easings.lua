@@ -4,6 +4,8 @@ local _sqrt, _cos, _sin, _pow = math.sqrt, math.cos, math.sin, math.pow
 
 function easings:new()
 	self.__index = self
+	
+		
   return setmetatable( {} , self)
 end
 
@@ -253,8 +255,46 @@ function easings:easeInOutBounce(t)
 	return (1 + easings:easeOutBounce(2 * t - 1)) / 2
 end
 
-function easings:interpolate(a, b, percentage)
-	return a + (b - a) * easings:linear(percentage)
+function easings:interpolate(a, b, percentage, ease_type)
+	ease_type = ease_type or "linear"
+	local options = 	{
+		["linear"] = easings:linear(percentage),
+
+		["easeInSine"] = easings:easingseasingseaseInSine(percentage),
+		["easeInQuad"] = easings:easeInQuad(percentage),
+		["easeInCubic"] = easings:easeInCubic(percentage),
+		["easeInQuart"] = easings:easeInQuart(percentage),
+		["easeInQuint"] = easings:easeInQuint(percentage),
+		["easeInExpo"] = easings:easeInExpo(percentage),
+		["easeInCirc"] = easings:easeInCirc(percentage),
+		["easeInBack"] = easings:easeInBack(percentage),
+		["easeInElastic"] = easings:easeInElastic(percentage),
+		["easeInBounce"] = easings:easeInBounce(percentage),
+
+		["easeOutSine"] = easings:easeOutSine(percentage),
+		["easeOutQuad"] = easings:easeOutQuad(percentage),
+		["easeOutCubic"] = easings:easeOutCubic(percentage),
+		["easeOutQuart"] = easings:easeOutQuart(percentage),
+		["easeOutQuint"] = easings:easeOutQuint(percentage),
+		["easeOutExpo"] = easings:easeOutExpo(percentage),
+		["easeOutCirc"] = easings:easeOutCirc(percentage),
+		["easeOutBack"] = easings:easeOutBack(percentage),
+		["easeOutElastic"] = easings:easeOutElastic(percentage),
+		["easeOutBounce"] = easings:easeOutBounce(percentage),
+
+		["easeInOutSine"] = easings:easeInOutSine(percentage),
+		["easeInOutQuad"] = easings:easeInOutQuad(percentage),
+		["easeInOutCubic"] = easings:easeInOutCubic(percentage),
+		["easeInOutQuart"] = easings:easeInOutQuart(percentage),
+		["easeInOutQuint"] = easings:easeInOutQuint(percentage),
+		["easeInOutExpo"] = easings:easeInOutExpo(percentage),
+		["easeInOutCirc"] = easings:easeInOutCirc(percentage),
+		["easeInOutBack"] = easings:easeInOutBack(percentage),
+		["easeInOutElastic"] = easings:easeInOutElastic(percentage),
+		["easeInOutBounce"] = easings:easeInOutBounce(percentage),
+	
+	}
+	return a + (b - a) * options[ease_type](percentage)
 end
 
 return easings
