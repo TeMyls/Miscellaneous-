@@ -1,8 +1,9 @@
 local easings = {}
-easings.__index = easings
+
 local _sqrt, _cos, _sin, _pow = math.sqrt, math.cos, math.sin, math.pow
 
 function easings:new()
+	self.__index = self
   return setmetatable( {} , self)
 end
 
@@ -222,8 +223,40 @@ function easings:easeInOutElastic(t)
 	return (_pow(2, -20 * t + 10) * _sin((20 * t - 11.125) * c5)) / 2 + 1
 end
 
+function easings:easeOutBounce(t)
+	local n1 = 7.5625
+	local d1 = 2.75
+
+	if t < (1 / d1) then
+		return n1 * t * t
+	elseif t < (2 / d1) then
+		t = t - 1.5 / d1
+		return n1 * t * t + 0.75
+	elseif t < (2.5 / d1) then
+		t = t - 2.25 / d1
+		return n1 * t * t + 0.9375
+	else
+		t = t - 2.625 / d1
+		return n1 * t * t + 0.984375
+	
+	end
+end
+
+function easings:easeInBounce(t)
+	return 1 - easings:easeOutBounce(1 - t)
+end
+
+function easings:easeInOutBounce(t)
+	if t < 0.5 then
+		return (1 - easings:easeOutBounce(1 - 2 * t)) / 2
+	end
+	return (1 + easings:easeOutBounce(2 * t - 1)) / 2
+end
+
 function easings:interpolate(a, b, percentage)
 	return a + (b - a) * easings:linear(percentage)
 end
 
 return easings
+
+

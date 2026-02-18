@@ -247,4 +247,3 @@ print(interpolate(3, 7, 0.73, "linear"))
 print(interpolate(3, 7, 0.73, "easeInBack"))
 print(interpolate(3, 7, 0.73, "easeInOutElastic"))
 
-
