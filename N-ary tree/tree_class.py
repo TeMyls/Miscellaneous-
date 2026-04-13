@@ -137,7 +137,7 @@ class nodeGraph:
 								else:
 									#print('ne')
 									dict_new[key] = self.edges[key]
-						self.edges = dict_new
+				self.edges = dict_new
 						#----------------------------------------------------------------------------------------------------
 
 
