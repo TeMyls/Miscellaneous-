@@ -1,3 +1,6 @@
+def init_faux2D(rows, cols, filler):
+	return rows * cols * [filler]
+
 def get_faux2D(array, row, col, rows, cols):
 	#indexing a 1D array as if it were a 2D array
 	return array[(row % rows) * cols + (col % cols)]
