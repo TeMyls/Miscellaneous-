@@ -176,8 +176,12 @@ class GUI_Manager:
 		
 		self.grid = self.empty_map(5, 5, "?")
 		
+		# height percentage of parent
 		self.wpcts = []
+		# width percentage of parent
 		self.hpcts = []
+		# minimal size percentage of parent, always squart
+		self.mnpcts = []
 		
 		
 
@@ -297,6 +301,7 @@ class GUI_Manager:
 		
 		has_hpct = kwargs.get("hpct")
 		has_wpct = kwargs.get("wpct")
+		has_mnpct = kwargs.get("mnpct")
 		
 		
 		has_parent = kwargs.get("pidx")
@@ -312,6 +317,12 @@ class GUI_Manager:
 			self.wpcts.append(has_wpct)
 		else:
 			self.wpcts.append(-1)
+			
+		if has_mnpct:
+			self.mnpcts.append(has_mnpct)
+		else:
+			self.mnpcts.append(-1)
+			
 		# Sets of "", "X", "Y", or "Both"
 			# default ""
 			# makes the widget take up more parts of it's sub space, horizontally, vertically or both
@@ -363,22 +374,35 @@ class GUI_Manager:
 		
 		if parent_idx != -1:
 			
-			aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
+			
+			
 			wpct = self.wpcts[idx]/100
 			hpct = self.hpcts[idx]/100
-			if self.wpcts[idx] != -1:
-				self.areas[idx] = [
-														0, 0,
-														uw * wpct, ah
-													]
-
-			aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
-
-			if self.hpcts[idx] != -1:
-				self.areas[idx] = [
-														0, 0,
-														aw, uh * hpct
-													]
+			mnpct = self.mnpcts[idx]/100
+			if self.mnpcts[idx] != -1:
+				aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
+				mn = min(uw, uh)
+				if self.wpcts[idx] != -1:
+					self.areas[idx] = [
+															0, 0,
+															mn * mnpct, mn * mnpct
+														]
+			else:
+				
+				aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
+				if self.wpcts[idx] != -1:
+					self.areas[idx] = [
+															0, 0,
+															uw * wpct, ah
+														]
+	
+				aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
+	
+				if self.hpcts[idx] != -1:
+					self.areas[idx] = [
+															0, 0,
+															aw, uh * hpct
+														]
 			
 			aw, ah, uw, uh = self.get_dimensions(parent_idx, idx)
 			directions = self.get_iAnchor(parent_idx, idx)
@@ -659,7 +683,7 @@ fifth = Z.add_area(one)
 one = {}
 one["area"] = Z.get_box(0, 0, 3, 3)
 one["fg"] = "5"
-one["wpct"] = 250
+one["mnpct"] = 500
 one["ianchor"] = ""
 one["eanchor"] = "EN"
 one["fill"] = ""
