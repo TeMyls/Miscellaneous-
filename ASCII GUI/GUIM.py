@@ -50,7 +50,7 @@ class nodeGraph:
 		#print("yop" , tree)
 		
 		while deque:
-			print(deque)
+			#print(deque)
 			item = deque.pop(0) if is_bfs else deque.pop()
 			if tree.get(item):
 				for i in range(len(tree[item]) - 1,-1,-1):
@@ -156,17 +156,18 @@ class GUI_Manager:
 		# Sets of x1-y1-x2-y2 
 		# the widget area itself
 		self.areas = []
-		# internal anchor
+		# text anchor, internal anchor, external anchor
 		# Sets of either C, N, NE, E, SE, S, SW, W, or NE:
-			# describes a x1-y1-x2-y2 is positioned inside a 
+		# or
+		# N, NE, NW, EN, E, ES, WN, W, WS, S, SE, SW, WNW, NEN, SES, WSW: if external
+			# describes how a string or another x1-y1-x2-y2 is positioned inside or outside a x1-y1-x2-y2
 			# default "" or Center
 			# designates the location of the widget in the sub space
+		self.tanchors = []
 		self.ianchors = []
-		# Sets of either 
-		# N, NE, NW, EN, E, ES, WN, W, WS, S, SE, SW, WNW, NEN, SES, WSW:
-			# default ""
-			# designates the location of the widget outside a space
 		self.eanchors = []
+		
+		
 		# Sets of "", X", "Y", or "Both"
 			# default: ""
 			# makes the widget take up more parts of it's sub space, horizontally, vertically or both
@@ -182,6 +183,8 @@ class GUI_Manager:
 		self.hpcts = []
 		# minimal size percentage of parent, always squart
 		self.mnpcts = []
+		# individual strings
+		self.texts = []
 		
 		
 
@@ -278,6 +281,33 @@ class GUI_Manager:
 			
 		}
 		
+	def get_tAnchor(self, idx: int, text: str):
+		
+		
+		parent = self.areas[idx]
+
+		
+		top_x = parent[0]
+		top_y = parent[1]
+		mid_x = parent[0] + math.floor((parent[2] - parent[0])/2 - len(text)/2)
+		mid_y = parent[1] + math.floor((parent[3] - parent[1])/2)
+		end_x = parent[2] - len(text)
+		end_y = parent[3] - 1
+		
+		
+		
+		
+		return {
+			"N"  : [mid_x, top_y],
+			"NE" : [end_x, top_y],
+			"NW" : [top_x, top_y],
+			"C"  : [mid_x, mid_y],
+			"E"  : [end_x, mid_y],
+			"W"  : [top_x, mid_y],
+			"S"  : [mid_x, end_y],
+			"SE" : [end_x, end_y],
+			"SW" : [top_x, end_y]
+		}
 		
 	def add_area(self, kwargs):
 		
@@ -289,11 +319,13 @@ class GUI_Manager:
 		
 		has_area = kwargs.get("area")
 		
+		has_text = kwargs.get("text")
 		
 		has_fill = kwargs.get("fill")
 		
 		has_ianchor = kwargs.get("ianchor")
 		has_eanchor = kwargs.get("eanchor")
+		has_tanchor = kwargs.get("tanchor")
 		
 		# two strings one representing the space color and the othe the sub soace
 		has_bg = kwargs.get("bg")
@@ -340,6 +372,15 @@ class GUI_Manager:
 		else:
 			self.ianchors.append("")
 			
+		# Sets of either N, NE, E, C, SE, S, SW, W, or NE:
+			# default C or Center
+			# designates the location of the widget inside a space
+		if has_tanchor:
+				
+			self.tanchors.append(has_tanchor)
+		else:
+			self.tanchors.append("")
+			
 		# Sets of either 
 		# N, NE, NW, EN, E, ES, WN, W, WS, S, SE, SW, WNW, NEN, SES, WSW:
 			# default ""
@@ -367,7 +408,10 @@ class GUI_Manager:
 		else:
 			self.areas.append(self.get_box(-1, -1, -1, -1))
 		
-		
+		if has_text != None:
+			self.texts.append(has_text)
+		else:
+			self.texts.append("")
 	
 		parent_idx = self.space_tree.get_parent(idx, False)
 		
@@ -505,7 +549,7 @@ class GUI_Manager:
 			ow = abs(area[2] - area[0])
 			oh = abs(area[3] - area[1])
 			#len(self.grid)#
-			self.grid = self.empty_map(oh, ow, "@")
+			#self.grid = self.empty_map(oh, ow, "@")
 			deque = self.space_tree.traverse(0, True)
 			#print(self.space_tree.edges)
 			#print(deque, self.areas)
@@ -515,7 +559,17 @@ class GUI_Manager:
 				area = self.areas[item]
 				x1, y1, x2, y2 = area
 				self.set_box(x1, y1, x2, y2, self.fgs[item], self.grid)
-				
+				text = self.texts[item]
+				t_anchor = self.tanchors[item]
+				if text != "":
+					if t_anchor != "":
+						tx = math.floor((x2 - x1)/2)
+						ty = math.floor((y2 - y1)/2)
+						tx, ty = self.get_tAnchor(item, text)[t_anchor]
+						tlen = len(text)
+						for i in range(tlen):
+							
+							self.grid[ty][tx + i] = text[i]
 				
 							
 			self.display_true(self.grid)
@@ -575,14 +629,15 @@ class GUI_Manager:
 		return [x1, y1, x2, y2]
 		
 	
+		#return N, NE, NW, C, E, W, S, SE, SW
 	
-		
+	
+	
 	def remove_area(self, idx):
 		self.eanchors.pop(idx)
 		self.ianchors.pop(idx)
 		self.fills.pop(idx)
 		self.space_tree.remove_child(idx)
-
 
 
 """
@@ -615,7 +670,8 @@ kwargs = {
 			
 		}
 """
-		
+
+
 Z = GUI_Manager()
 Z.grid = Z.empty_map(20, 44, "X")
 
@@ -643,6 +699,8 @@ one["area"] = Z.get_box(0, 0, 22, 8)
 one["fg"] = "1"
 one["ianchor"] = "C"
 one["eanchor"] = ""
+one["tanchor"] = "S"
+one["text"] = "label one"
 one["fill"] = ""
 one["pidx"] = first
 
@@ -654,6 +712,8 @@ one["wpct"] = 50
 one["fg"] = "2"
 one["ianchor"] = "N"
 one["eanchor"] = ""
+one["tanchor"] = "N"
+one["text"] = "label two"
 one["fill"] = ""
 one["pidx"] = second
 
@@ -696,3 +756,4 @@ sixth = Z.add_area(one)
 
 Z.render_areas()
 #Z.display_data()
+
