@@ -87,10 +87,11 @@ function tree:remove_node(node_idx)
   local i = 1
   local j = 1
   while i <= size do
+    j = 1
     while j <= size do
       local ele = self.edges[i][j]
       if ele ~= -1 then
-        ele = ele - 1
+        self.edges[i][j] =  self.edges[i][j] - 1
       end
       j = j + 1
     end
@@ -152,8 +153,15 @@ end
 
 
 function tree:traverse(node_idx, is_bfs)
+  if #self.edges == 0 then
+    return 
+  end
+
+  is_bfs = is_bfs or false
   local visited = {[node_idx] = true}
   local deque = {node_idx}
+
+
   while #deque > 0 do
     local parent = -1
     if is_bfs then
@@ -162,15 +170,17 @@ function tree:traverse(node_idx, is_bfs)
       parent = table.remove(deque)
     end
 
-    for i = 1, #self.edges[parent] do
-      local child = self.edges[parent][i]
-      if child ~= -1 then
-        if not visited[child] then
-          table.insert( deque, child )
-          visited[child] = true
+    if #self.edges[parent] then
+      for i = 1, #self.edges[parent] do
+        local child = self.edges[parent][i]
+        if child ~= -1 then
+          if not visited[child] then
+            table.insert( deque, child )
+            visited[child] = true
+          end
         end
-      end
 
+      end
     end
     
   end
