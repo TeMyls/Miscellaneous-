@@ -34,11 +34,12 @@ Copying a adjcency list
 class TreeIndexGrid:
 	def __init__(self):
 		self.edges = []
+		self.directed = True
 		
 	def input_indexes(self, idx_dict):
-		self.set_size(len(a))
-		for i in a:
-			for j in a[i]:
+		self.set_size(len(idx_dict))
+		for i in idx_dict:
+			for j in idx_dict[i]:
 				t.add_child(i, j)
 		
 		
@@ -116,10 +117,16 @@ class TreeIndexGrid:
 			return
 			
 		# no undirected graphs
-		if self.edges[child_idx][parent_idx] == parent_idx:
-			return
+		if self.directed:
+			if self.edges[child_idx][parent_idx] == parent_idx:
+				return
 			
-		self.edges[parent_idx][child_idx] = child_idx
+			self.edges[parent_idx][child_idx] = child_idx
+			
+		else:
+			
+			self.edges[parent_idx][child_idx] = child_idx
+			self.edges[child_idx][parent_idx] = parent_idx
 		
 	def remove_child(self, parent_idx: int, child_idx: int):
 		# the parent is a row
@@ -134,8 +141,11 @@ class TreeIndexGrid:
 		if parent_idx == child_idx:
 			return
 			
-		self.edges[parent_idx][child_idx] = -1
-		
+		if self.directed:
+			self.edges[parent_idx][child_idx] = -1
+		else:
+			self.edges[parent_idx][child_idx] = -1
+			self.edges[child_idx][parent_idx] = -1
 		
 	def traverse(self, idx, is_bfs = False):
 		visited = [idx]
@@ -159,7 +169,8 @@ class TreeIndexGrid:
 				visited.append(child)
 				deque.append(child)
 		return visited
-
+	
+	
 	
 t = TreeIndexGrid()
 
@@ -173,6 +184,14 @@ a = {
 		 6: [0, 5]
 		 }
 		 
+b = {
+	
+		 0: [1],
+		 1: [2],
+		 2: [3],
+		 3: [0],
+		 
+		 }
 
 t.input_indexes(a)
 
