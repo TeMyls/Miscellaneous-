@@ -51,11 +51,10 @@ def lerp(a, b, percentage):
 
 def r_bez(point_ls: list[float], points: int, point: int) -> list[float]:
 	# the way bezier curves work is by linear interpolating(lerp)
-		# the value from one coordinate to another, getting an X-Y point at a percentage between the two
+		# the value from one coordinate to another, getting a percentage between the two
 		# these points are lerp-ed until the path of a single line is deduced
-	# Example
 	# 4 X-Y coordinate pairs have 3 lines between them
-	# when a percentage value is connected inbetween these 3 lines sequentially you get 2 lines, then 1 line from where each point on the found
+	# when a value is connected inbetween these 3 lines sequentially you get 2 lines, then 1 line fron where each point on the found
 	# this recurcise and iterative versions do exactly that, once the amount of points is reduced to 4 numbers, 2 X-Y pairs, a line
 			# the curve's coordinate at that percentage is found
 			
@@ -142,7 +141,36 @@ def i_bez(point_ls: list[float], points: int, point: int) -> list[float]:
 	y = lerp(y1, y2, point/points)
 	return [x , y]
 
-		
+def spline(point_ls: list[float], points: int, point: int) -> list[float]:
+	# Spline
+	# Splitting the points into smaller quadratic Bezier curves, each which only have 8 X-Y, or 4 control points
+	# Every other point is on the line itself and the curve is controlled by the two points preceding it
+	# control is more localized 
+	#print(points)
+	if len(point_ls) > 7:
+
+                    
+                    # 8 points is 4 X-Y points
+                    inc = 8
+                    dec = 0
+                    for i in range(0, len(control_points) + 1, inc):
+                        if i + inc - dec < len(control_points):
+                            start = i - dec
+                            stop = i + inc - dec
+                            ele = control_points[ start:stop ]
+                            dec += 2
+                            control_matrix.append(ele)
+                            #print(ele, start, stop, "yep")
+
+                        
+
+                            #curve_coords.clear()
+                            for j in range(points + 1):
+                                curve_xy = i_bez(ele, points, j)
+                            
+                                curve_coords.append(curve_xy[0])
+                                curve_coords.append(curve_xy[1])
+                    
 		
 grid = empty_map(22, 22, wall_color)
 w = len(grid[0]) - 1
@@ -153,12 +181,12 @@ coords = [
 			0									, 0, 
 			floor(w  * 0.20)	,floor(h * .80), 
 			floor(w  * 0.65)	,floor(h * .20), 
-			floor(w  * 0.90)	,floor(h * .75)
+			floor(w  * 0.30)	,floor(h * .15)
 		]
 #curve = n_curve_bezier(points, 8)
 
 for i in range(points):
-	curve = r_bez(coords, points, i)
+	curve = i_bez(coords, points, i)
 	
 	x = floor(curve[0])
 	y = floor(curve[1])
