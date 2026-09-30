@@ -31,6 +31,23 @@ def dfs(dct,node):
 
 	print(visited)
 
+def bfs_dfs(tree: dict[any, list[any]], node: any, is_bfs: bool):
+	visited = [node]
+	deque = [node]
+	print(tree)
+	
+	while deque:
+		print(deque)
+		item = deque.pop(0) if is_bfs else deque.pop()
+		if tree.get(item):
+			for i in range(len(tree[item]) - 1,-1,-1):
+				if tree[item][i] not in visited:
+					deque.append(tree[item][i])
+					visited.append(tree[item][i])
+					
+
+	print(visited)
+
 tree_bfs = {
 		'a':['b','c'],
 		'b':['d'],
