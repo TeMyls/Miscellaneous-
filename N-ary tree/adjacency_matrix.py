@@ -31,7 +31,7 @@ Copying a adjcency list
 	
 '''
 
-class TreeIndexGrid:
+class AdjacencyMatrix:
 	def __init__(self):
 		self.edges = []
 		self.directed = True
@@ -170,9 +170,9 @@ class TreeIndexGrid:
 				deque.append(child)
 		return visited
 	
-	
-	
-t = TreeIndexGrid()
+# example - comment out when using
+'''
+t = AdjacencyMatrix()
 
 a = {
 		 0: [5, 1, 6],
@@ -209,6 +209,6 @@ t.add_node()
 print("adding")
 t.add_node()
 t.display_tree()
-
+'''
 
 
