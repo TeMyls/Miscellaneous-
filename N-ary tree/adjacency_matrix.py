@@ -40,7 +40,7 @@ class AdjacencyMatrix:
 		self.set_size(len(idx_dict))
 		for i in idx_dict:
 			for j in idx_dict[i]:
-				t.add_child(i, j)
+				self.add_child(i, j)
 		
 		
 	def init_2D_array(self, rows,columns,color):
