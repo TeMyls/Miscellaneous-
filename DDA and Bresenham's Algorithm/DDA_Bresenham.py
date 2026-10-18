@@ -15,25 +15,6 @@ traceback_color = 5
 goal_color = 10
 start_color = 3
 
-def degrees_to_radians(deg):
-		return (deg * math.pi)/180		
-			
-def angle_to(x1, y1, x2, y2):
-    #in radians
-    return math.atan2(y2 - y1, x2 - x1)
-
-def distance_to(x1, y1, x2, y2):
-    dx = x1 - x2
-    dy = y1 - y2
-    s = dx * dx + dy * dy
-    return math.sqrt(s)
-
-def in_bounds(x, y, w, h):
-    return -1 < x < w and -1 < y < h
-
-def clamp(x, a, b):
-  return min(max(x, a), b)
-
 def empty_map(rows,columns,empty_arr):
 	for i in range(rows):
 		empty_arr.append([wall_color]*columns)
@@ -97,39 +78,6 @@ def DDA(x0, y0, x1, y1):
 		
 	return coorinates
 
-def DDA_raycast(map_grid: list[list[int]], x0: float, y0: float, radians: float) -> list[int]: 
-	xinc = math.cos(radians)
-	yinc = math.sin(radians)
-
-	# start with 1st point 
-	x = x0
-	y = y0
-	# make a list for coordinates 
-	coorinates = [] 
-	coorinates.append([x, y]) 
-	
-	og_tile = map_grid[math.floor(y)][math.floor(x)]
-	cur_tile = og_tile
-	valid_tiles = [floor_color]
-	total_dist = 0
-	
-	while cur_tile == og_tile or cur_tile in valid_tiles:
-		
-		x = x + xinc 
-		y = y + yinc 
-		if in_bounds(x,y,len(map_grid[0]),len(map_grid)):
-			cur_tile = map_grid[math.floor(y)][math.floor(x)]
-		else:
-			total_dist = distance_to(x0, y0, x, y)
-			return [round(total_dist), math.floor(y), math.floor(x)]
-		
-		if cur_tile == wall_color:
-			total_dist = distance_to(x0, y0, x, y)
-			return [round(total_dist), math.floor(y), math.floor(x)]
-			
-				
-			
-
 def DDA_3D(x0, y0, z0, x1, y1, z1):
 	# Find absolute differences
 	dx = x1 - x0
@@ -163,6 +111,68 @@ def DDA_3D(x0, y0, z0, x1, y1, z1):
 	return coordinates
 	
 
+def bresenham_ellipse(cx, cy, rx, ry):
+    # https://www.tutorialspoint.com/computer_graphics/computer_graphics_ellipse_generation_algorithm.htm
+    # Python3 program for implementing 
+    # Mid-Point Ellipse Drawing Algorithm 
+    
+    x = 0
+    y = ry
+
+    # Initial decision parameter of region 1 
+    d1 = ((ry * ry) - (rx * rx * ry) + (0.25 * rx * rx))
+    dx = 2 * ry * ry * x
+    dy = 2 * rx * rx * y
+
+    points = []
+
+    # For region 1 
+    while (dx < dy): 
+
+        # Print points based on 4-way symmetry 
+        points.append((x + cx, y + cy))
+        points.append((-x + cx, y + cy)) 
+        points.append((x + cx, -y + cy ))
+        points.append((-x + cx, -y + cy))
+
+        # Checking and updating value of 
+        # decision parameter based on algorithm 
+        if (d1 < 0): 
+            x += 1
+            dx = dx + (2 * ry * ry)
+            d1 = d1 + dx + (ry * ry)
+        else:
+            x += 1
+            y -= 1
+            dx = dx + (2 * ry * ry) 
+            dy = dy - (2 * rx * rx)
+            d1 = d1 + dx - dy + (ry * ry)
+
+    # Decision parameter of region 2 
+    d2 = (((ry * ry) * ((x + 0.5) * (x + 0.5))) + ((rx * rx) * ((y - 1) * (y - 1))) - (rx * rx * ry * ry))
+
+    # Plotting points of region 2 
+    while (y >= 0):
+
+        # printing points based on 4-way symmetry 
+        points.append((x + cx, y + cy))
+        points.append((-x + cx, y + cy))
+        points.append((x + cx, -y + cy))
+        points.append((-x + cx, -y + cy))
+
+        # Checking and updating parameter 
+        # value based on algorithm 
+        if (d2 > 0):
+            y -= 1; 
+            dy = dy - (2 * rx * rx); 
+            d2 = d2 + (rx * rx) - dy; 
+        else:
+            y -= 1; 
+            x += 1; 
+            dx = dx + (2 * ry * ry); 
+            dy = dy - (2 * rx * rx); 
+            d2 = d2 + dx - dy + (rx * rx); 
+    return points
 
 def bresenham_circle(x0, y0, radius):
 	x = radius
@@ -248,7 +258,8 @@ def bresenham_line(start: tuple[int, int], end: tuple[int, int]) -> list[tuple[i
 	if swapped:
 		points.reverse()
 	return points
-	
+
+
 blank = empty_map(20,20,[])
 possible_tiles = []
 for y in range(len(blank) - 1):
@@ -275,6 +286,11 @@ for coords in between:
 	
 symbol_display(blank)
 
+#print("circle")
+#for point in bresenham_circle(5, 5, 5):
+print("ellipse")
+for point in bresenham_ellipse(5,5,3,2):
+	print(point)
 #rx, ry = pair1[0], pair1[1]
 #print(rx," ",ry)
 #print(possible_tiles)
