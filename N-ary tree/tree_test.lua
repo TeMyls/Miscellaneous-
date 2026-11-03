@@ -1,4 +1,4 @@
-local tree = require "n_ary_tree"
+local tree = require "adjacency_list"
 
 
 tree.edges = {
@@ -16,7 +16,7 @@ for i = 1, #v do
     print(v[i])
 end
 print("hiias")
-tree:delete_array_index(1)
+tree:delete_index(1)
 tree:display()
 v = tree:traverse(0, true)
 for i = 1, #v do

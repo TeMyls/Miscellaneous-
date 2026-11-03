@@ -201,10 +201,10 @@ function tree:add_index(new_idx, parent_idx)
   self:add_child(new_idx, parent_idx)
 end
 
-function tree:delete_array_index(idx)
+function tree:delete_index(idx)
   idx = idx or -1
   if idx > 0 then
-    local new_edges = {}
+    
     local has_idx = false
     for key, value in pairs(self.edges) do
 
@@ -221,37 +221,23 @@ function tree:delete_array_index(idx)
       end
     end
 
+    local new_edges = {}
     if has_idx then
 
       table.remove(self.edges, idx)
       for key, value in pairs(self.edges) do
+        local new_tbl = {}
+        local new_key = (key > idx) and key - 1 or key
         for i = 1, #self.edges[key] do
           local child = self.edges[key][i]
-          if child > idx then
-            self.edges[key][i] = self.edges[key][i] - 1
-            if key > idx then
-
-              local new_key = key - 1
-              if not new_edges[new_key] then
-                new_edges[new_key] = {}
-                table.insert(new_edges[new_key], self.edges[key][i])
-              else
-                table.insert(new_edges[new_key], self.edges[key][i])
-              end
-
-            else
-
-              if not new_edges[key] then
-                new_edges[key] = {}
-                table.insert(new_edges[key], self.edges[key][i])
-              else
-                table.insert(new_edges[key], self.edges[key][i])
-              end
-              --new_edges[key] = self.edges[key][i]
-            end
+          -- ternary if:  cond and false_statement or true statement
+          if child ~= idx then
+            local new_idx = (child > idx) and child - 1 or child
+            table.insert(new_tbl, new_idx)
           end
+          
         end
-
+        new_edges[new_key] = new_tbl
       end
     end
     

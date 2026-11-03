@@ -116,28 +116,35 @@ class AdjacencyList:
 				# updating the edges list
 				# self.edges is an adjcency list
 				# print("remove vert")
+
 				# getting rid of the deleted vertex in the dictionary
 				self.edges.pop(idx)
-
+				
 				dict_new = {}
 				for key in self.edges:
 					#getting rid of the deleted vertex in the vertex's array
-					if idx in self.edges[key]:
-						self.edges[key].remove(idx)
-						#self.edge_options[key].pop(v_ind)
-						#reorganizing the dictionary with updated indexes to reflect deletion
-						for i in range(len(self.edges[key])):
-							if self.edges[key][i] > idx:
-								self.edges[key][i] = self.edges[key][i] - 1
-								#filling the replacement dictionary
-								if key > idx:
-									#print('ye')
-									new_key = key - 1
-									dict_new[new_key] = self.edges[key]
-								else:
-									#print('ne')
-									dict_new[key] = self.edges[key]
+					new_key = key if key < idx else key - 1
+					new_arr = []
+					#reorganizing the dictionary with updated indexes to reflect deletion
+					for i in range(len(self.edges[key])):
+						
+						if self.edges[key][i] != idx:
+							new_idx = self.edges[key][i] if self.edges[key][i] < idx else self.edges[key][i] - 1 
+							#self.edges[key][i] = self.edges[key][i] - 1
+							'''
+							if key > idx:
+								#print('ye')
+								new_key = key - 1
+								dict_new[new_key] = self.edges[key]
+							'''
+							new_arr.append(new_idx)
+						
+					dict_new[new_key] = new_arr
+					#else:
+
 				self.edges = dict_new
+				
+				
 						#----------------------------------------------------------------------------------------------------
 
 
@@ -184,6 +191,9 @@ d = {
 	
 
 tree = AdjacencyList()
-tree.edges = d
+tree.edges = a
+tree.display()
+tree.delete_index(0)
+print()
 tree.display()
 print(tree.traverse(0, False))
