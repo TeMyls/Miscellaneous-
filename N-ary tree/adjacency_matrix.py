@@ -146,6 +146,34 @@ class AdjacencyMatrix:
 		else:
 			self.edges[parent_idx][child_idx] = -1
 			self.edges[child_idx][parent_idx] = -1
+
+	def get_parent(self, idx, is_bfs = False):
+		visited = [0]
+		deque = [0]
+		while deque:
+			parent = -1
+			print("Deque", deque)
+			if is_bfs:
+				parent = deque.pop(0)
+			else:
+				parent = deque.pop()
+			
+			
+			for child in self.edges[parent]:
+				if child == -1:
+					continue
+					
+				if child in visited:
+					continue
+
+				if child == idx:
+					return parent
+				
+				visited.append(child)
+				deque.append(child)
+				
+	
+		return -1
 		
 	def traverse(self, idx, is_bfs = False):
 		visited = [idx]
